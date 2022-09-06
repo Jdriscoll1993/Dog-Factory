@@ -1,9 +1,12 @@
-﻿@model DogViewModel
-@{       
+﻿@model List<MVCApp.Models.DogViewModel>
+@{
+    ViewData["Title"] = "Dog List Page";
 }
 
-<h1>Hello World!</h1>
-<h3>This is the index page of the HelloWorld Controller</h3>
-<h4>A dog named @Model.Name says hello!</h4>
-<h4>@Model.Name is @Model.Age years old!</h4>
-
+<ul>
+    @foreach(var dog in Model)
+    {
+        <li>@dog.Name (@dog.Age)</li>
+        <li>@dog.Breed</li>
+    }
+</ul>

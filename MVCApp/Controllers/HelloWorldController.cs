@@ -5,20 +5,25 @@ namespace MVCApp.Controllers
 {
     public class HelloWorldController : Controller
     {
+        //persist a single dogs list; doesnt need an instance of the controller
+        private static List<DogViewModel> dogs = new List<DogViewModel>();
         public IActionResult Index()
         {
-            DogViewModel dog = new DogViewModel() 
-            { 
-                Name = "Fippy", 
-                Age = 2 
-            };
-            return View(dog);
+            return View(dogs);
         }
-
 
         public IActionResult Create()
         {
-            return View();
+            DogViewModel dogViewModel = new DogViewModel();
+            return View(dogViewModel); //data binding - Controller > View
         }
+
+        public IActionResult CreateDog(DogViewModel newDog)
+        {
+            dogs.Add(newDog);
+            return RedirectToAction(nameof(Index));
+        }
+
+
     }
 }
